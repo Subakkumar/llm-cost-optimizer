@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LLM Cost Optimizer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="brand-icon">◆</span>
+    LLM Cost Optimizer
+  </div>
+  <div class="nav-status">
+    <span class="status-dot"></span>
+    Powered by Groq · Llama 3.3 70B
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Cut Your <span class="accent">LLM Costs</span> with AI</h1>
+    <p class="hero-sub">Upload your OpenAI, Anthropic, or any LLM provider bill — get instant AI-powered recommendations to reduce spending without sacrificing quality.</p>
+  </div>
+
+  <!-- Upload Card -->
+  <div class="card upload-card">
+    <div id="drop-zone" class="drop-zone">
+      <div class="drop-icon">📂</div>
+      <h3>Drop your bill here</h3>
+      <p class="drop-sub">Supports OpenAI, Anthropic, Google, Groq CSV exports</p>
+      <button id="select-btn" class="btn-primary">Choose File</button>
+      <input type="file" id="file-input" accept=".csv" style="display:none"/>
+    </div>
+
+    <!-- Sample format hint -->
+    <div class="format-hint">
+      <span class="hint-label">Expected CSV format:</span>
+      <code>date, model, usage, cost</code>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+    <p>Analyzing your bill with Groq AI...</p>
+  </div>
+
+  <!-- Results -->
+  <div id="results" class="hidden">
+    <div class="results-header">
+      <h2>Analysis Results</h2>
+      <span id="results-provider" class="provider-badge"></span>
+    </div>
+
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Spent</div>
+        <div class="kpi-value accent" id="res-total">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Provider</div>
+        <div class="kpi-value" id="res-provider">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Models Used</div>
+        <div class="kpi-value" id="res-models">—</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Top Spender</div>
+        <div class="kpi-value" id="res-top">—</div>
+      </div>
+    </div>
+
+    <!-- Breakdown -->
+    <div class="card">
+      <h3 class="card-title">💸 Spending by Model</h3>
+      <div id="breakdown-list"></div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="card recommendations-card">
+      <h3 class="card-title">🤖 AI Recommendations</h3>
+      <div id="recommendations-text"></div>
+    </div>
+  </div>
+
+  <!-- Previous Analyses -->
+  <div class="card previous-card">
+    <h3 class="card-title">📋 Previous Analyses</h3>
+    <div id="previous-list">
+      {% if analyses %}
+        {% for a in analyses %}
+        <div class="prev-item" onclick="loadAnalysis({{ a.id }})">
+          <div class="prev-left">
+            <span class="prev-file">{{ a.filename }}</span>
+            <span class="prev-provider">{{ a.provider }}</span>
+          </div>
+          <div class="prev-right">
+            <span class="prev-cost">${{ '%.2f'|format(a.total_spent) }}</span>
+            <span class="prev-date">{{ a.created_at.strftime('%b %d, %Y') }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="empty-msg">No previous analyses yet. Upload your first bill!</p>
+      {% endif %}
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span>◆ LLM Cost Optimizer</span>
+  <span>github.com/Subakkumar</span>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

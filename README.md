@@ -1,0 +1,36 @@
+# LLM Cost Optimizer
+
+Upload your LLM provider bill and get AI-powered cost-saving recommendations powered by Groq (Llama 3.3 70B).
+
+## Features
+
+- Upload OpenAI, Anthropic, or any LLM CSV bill
+- Auto-detects provider from content
+- Spending breakdown by model with visual bars
+- AI recommendations — specific model alternatives with savings estimates
+- History of previous analyses
+- Drag and drop upload
+
+## Tech Stack
+
+- **Backend** — Python, Flask, SQLAlchemy, SQLite
+- **AI** — Groq API (Llama 3.3 70B)
+- **Frontend** — Vanilla JS, custom CSS
+
+## Setup
+
+1. Clone the repo
+2. `python -m venv venv` then activate
+3. `pip install -r requirements.txt`
+4. Add `GROQ_API_KEY=your_key` to `.env`
+5. `python app.py`
+6. Open `http://localhost:5007`
+
+## Sample Bill CSV
+
+```csv
+date,model,usage,cost
+2024-01-01,gpt-4,100,2.50
+2024-01-02,gpt-3.5-turbo,1000,0.75
+2024-01-03,gpt-4,50,1.25
+```
