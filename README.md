@@ -34,3 +34,10 @@ date,model,usage,cost
 2024-01-02,gpt-3.5-turbo,1000,0.75
 2024-01-03,gpt-4,50,1.25
 ```
+
+## Screenshots
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1baebbad-df98-41e0-9e60-2f46343285f4" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/003de8eb-5ff0-450e-8223-1802cd9636dc" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3fa3af4c-7ea8-4cbb-97a2-8ddb8f5c5436" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fda11d21-dad9-4332-8f7c-04956d3ab8a2" />
